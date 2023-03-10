@@ -4,6 +4,10 @@ const { exec } = require("child_process");
 class Actions {
   constructor() {
     this.subscriptions = new Map();
+    this.lastX = 0;
+    this.lastY = 0;
+    this.lastZ = 0;
+
   }
 
   subscribe(event, callback) {
@@ -11,8 +15,8 @@ class Actions {
   }
 
   handleAccelerometerData() {
-    let lastX, lastY, lastZ;
-    exec("termux-sensor -d accelerometer", (err, stdout, stderr) => {
+    
+    exec("termux-sensor -s accelerometer -n 1", (err, stdout, stderr) => {
       if (err) {
         console.error(`Error executing command: ${err}`);
         return;
@@ -22,9 +26,9 @@ class Actions {
       const y = parseFloat(values[1]);
       const z = parseFloat(values[2]);
       if (lastX && lastY && lastZ) {
-        const deltaX = Math.abs(lastX - x);
-        const deltaY = Math.abs(lastY - y);
-        const deltaZ = Math.abs(lastZ - z);
+        const deltaX = Math.abs(this.lastX - x);
+        const deltaY = Math.abs(this.lastY - y);
+        const deltaZ = Math.abs(this.lastZ - z);
         if (deltaX > 10 || deltaY > 10 || deltaZ > 10) {
           const callback = this.subscriptions.get("bump");
           if (callback) {
@@ -32,9 +36,10 @@ class Actions {
           }
         }
       }
-      lastX = x;
-      lastY = y;
-      lastZ = z;
+      this.lastX = x;
+      this.lastY = y;
+      this.lastZ = z;
+      console.log(this.lastX, this.lastY, this.lastZ);
       this.handleAccelerometerData();
     });
   }
