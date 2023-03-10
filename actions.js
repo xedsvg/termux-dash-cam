@@ -2,8 +2,12 @@
 const { spawn } = require("child_process");
 
 class Actions {
-  constructor() {
+  constructor(accelSensivity, accelInterval) {
     this.subscriptions = new Map();
+
+    this.accelSensivity = accelSensivity || 1;
+    this.accelInterval = accelInterval || 50;
+
     this.lastX = 0;
     this.lastY = 0;
     this.lastZ = 0;
@@ -41,7 +45,7 @@ class Actions {
   start() {
     // Listen for bump events
     (async () => {
-      await this.startAccelerometer(50, 0.5);
+      await this.startAccelerometer(this.accelInterval, this.accelSensivity);
     })();
 
     // Listen for battery events
