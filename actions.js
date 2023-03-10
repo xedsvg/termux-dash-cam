@@ -21,10 +21,8 @@ class Actions {
         console.error(`Error executing command: ${err}`);
         return;
       }
-      const values = stdout.split("\n")[0].split(":")[1].trim().split(",");
-      const x = parseFloat(values[0]);
-      const y = parseFloat(values[1]);
-      const z = parseFloat(values[2]);
+      const values = JSON.parse(stdout);
+      const [x, y, z] = stdout[Object.keys(stdout)[0]].values;
       if (lastX && lastY && lastZ) {
         const deltaX = Math.abs(this.lastX - x);
         const deltaY = Math.abs(this.lastY - y);
