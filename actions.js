@@ -1,4 +1,4 @@
-const { BatteryStatus } = require("termux");
+// const { BatteryStatus } = require("termux");
 const { exec } = require("child_process");
 
 class Actions {
@@ -44,13 +44,13 @@ class Actions {
     this.handleAccelerometerData();
 
     // Listen for battery events
-    const batteryStatus = new BatteryStatus({ refreshInterval: 10000 });
-    batteryStatus.addListener(({ level }) => {
-      const callback = this.subscriptions.get("battery");
-      if (callback) {
-        callback(level);
-      }
-    });
+    // const batteryStatus = new BatteryStatus({ refreshInterval: 10000 });
+    // batteryStatus.addListener(({ level }) => {
+    //   const callback = this.subscriptions.get("battery");
+    //   if (callback) {
+    //     callback(level);
+    //   }
+    // });
   }
 }
 

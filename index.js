@@ -18,13 +18,13 @@ actions.subscribe('bump', () => {
 });
 
 // Subscribe to the 'battery' event
-actions.subscribe('battery', (level) => {
-  // Take a timelapse if the battery level is at or above 50%
-  if (level >= 50) {
-    const recorder = new Recorder();
-    recorder.recordTimelapse(2,2);
-  }
-});
+// actions.subscribe('battery', (level) => {
+//   // Take a timelapse if the battery level is at or above 50%
+//   if (level >= 50) {
+//     const recorder = new Recorder();
+//     recorder.recordTimelapse(2,2);
+//   }
+// });
 
 // Start listening for events
 actions.start();
