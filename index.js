@@ -1,13 +1,12 @@
 const Actions = require('./actions');
 const Recorder = require('./recorder');
-const CheckTermuxApi = require('/checkTermuxApi');
+const termuxApi = require('termux');
 
 const api = require('./api');
 const PORT = 3000;
 
-new CheckTermuxApi();
 
-if(CheckTermuxApi.check()) {
+if(termuxApi) {
 // Create an instance of the Actions class
 const actions = new Actions();
 
