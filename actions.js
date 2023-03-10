@@ -41,8 +41,7 @@ class Actions {
 
   start() {
     // Listen for bump events
-    this.accelerometer.start();
-    this.accelerometer.on("data", (data) => this.handleAccelerometerData(data));
+    this.handleAccelerometerData();
 
     // Listen for battery events
     const batteryStatus = new BatteryStatus({ refreshInterval: 10000 });
