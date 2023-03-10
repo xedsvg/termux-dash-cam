@@ -22,7 +22,7 @@ class Actions {
         return;
       }
       const values = JSON.parse(stdout);
-      const [x, y, z] = stdout[Object.keys(stdout)[0]].values;
+      const [x, y, z] = values[Object.keys(stdout)[0]].values;
       if (lastX && lastY && lastZ) {
         const deltaX = Math.abs(this.lastX - x);
         const deltaY = Math.abs(this.lastY - y);
